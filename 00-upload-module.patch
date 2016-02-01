@@ -1,0 +1,42 @@
+diff --git a/APKBUILD b/APKBUILD
+index d9ad8eb..2abe67f 100644
+--- a/APKBUILD
++++ b/APKBUILD
+@@ -5,6 +5,7 @@
+ pkgname=nginx
+ pkgver=1.8.1
+ _nginxrtmpver=1.1.7
++_nginxuploadver=2.2
+ pkgrel=0
+ pkgdesc="lightweight HTTP and reverse proxy server"
+ url="http://www.nginx.org"
+@@ -19,6 +20,7 @@ makedepends="pcre-dev openssl-dev zlib-dev linux-headers"
+ subpackages="$pkgname-doc $pkgname-vim:vim"
+ source="http://nginx.org/download/$pkgname-$pkgver.tar.gz
+        nginx-rtmp-module-$_nginxrtmpver.tar.gz::https://github.com/arut/nginx-rtmp-module/archive/v$_nginxrtmpver.tar.gz
++       nginx-upload-module-$_nginxuploadver.zip::https://github.com/vkholodkov/nginx-upload-module/archive/$_nginxuploadver.zip
+        ipv6.patch
+        "
+ 
+@@ -69,6 +71,7 @@ build() {
+                --with-mail \
+                --with-mail_ssl_module \
+                --add-module="$srcdir/nginx-rtmp-module-$_nginxrtmpver" \
++               --add-module="$srcdir/nginx-upload-module-$_nginxuploadver" \
+                || return 1
+        make || return 1
+ }
+@@ -103,10 +106,13 @@ vim() {
+ 
+ md5sums="2e91695074dbdfbf1bcec0ada9fda462  nginx-1.8.1.tar.gz
+ 8006de2560db3e55bb15d110220076ac  nginx-rtmp-module-1.1.7.tar.gz
++ad52deb7a5b2ca7a5351ebac92a531df  nginx-upload-module-2.2.zip
+ 801a87f7f9d27f8ad85b41a78b4c4461  ipv6.patch"
+ sha256sums="8f4b3c630966c044ec72715754334d1fdf741caa1d5795fb4646c27d09f797b7  nginx-1.8.1.tar.gz
+ 7922b0e3d5f3d9c4b275e4908cfb8f5fb1bfb3ac2df77f4c262cda56df21aab3  nginx-rtmp-module-1.1.7.tar.gz
++e8d778ad5b8792e438cd75af1fbe84bc8b0622ba89ccad7749b7526a6a528e3a  nginx-upload-module-2.2.zip
+ a24ef5843ae0afa538b00c37eb7da7870f9d7f146f52a9668678f7296cf71d9b  ipv6.patch"
+ sha512sums="546eba1749af0034cb8b924d2432be2f0e82a75c545aa929391ef7234103c3f29376235a2ef1363b120e1825cda15aeb085a05f9ce3596c88466e112e82aa882  nginx-1.8.1.tar.gz
+ 9883462a04683f1e7af175da04b86d259ff6d677864667588fb073143f7130969eb2a5a5a48ddceda7a555b908580f179bdcacb7f0111413d51db5bfe43b396e  nginx-rtmp-module-1.1.7.tar.gz
++1d3f993037dcb3bd6cfc9b59dc97fdf12ee0167c69bc58f8e7e313256120fa77a2df9c09178367208e2f00221cf0096d1d242720770f0e1c6af4ce1109f57cd7  nginx-upload-module-2.2.zip
+ 68d64a84568ec2df0366925ab282a05ebe21a85044b6c7844a47573cfd8cc8ed119cc772358bc3fff36e2d4fdf583a730592825f5f98632993ca86d1f8438d5f  ipv6.patch"
